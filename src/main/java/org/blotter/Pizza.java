@@ -1,40 +1,26 @@
 package org.blotter;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.file.Paths;
-import java.util.Scanner;
+import java.util.Arrays;
 
 public class Pizza {
+    enum Ingredient {T, M}
 
-    public static void main(String[] args) {
-        String filename;
-        if (0 < args.length) {
-            filename = args[0];
-        } else {
-            filename = getFilenameFromSystemIn();
-        }
+    final Ingredient[][] ingredients;
+    final int minIngredientsPerSlice;
+    final int maxCellsPerSlice;
 
-        readFileByLine(Paths.get("data/" + filename).toAbsolutePath().toFile());
+    public Pizza(int rows, int cols, int minIngredientsPerSlice, int maxCellsPerSlice) {
+        this.ingredients = new Ingredient[rows][cols];
+        this.minIngredientsPerSlice = minIngredientsPerSlice;
+        this.maxCellsPerSlice = maxCellsPerSlice;
     }
 
-    private static String getFilenameFromSystemIn() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a file name: ");
-        System.out.flush();
-        return scanner.nextLine();
-    }
-
-    private static void readFileByLine(File file) {
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                System.out.println(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @Override
+    public String toString() {
+        return "Pizza{" +
+                "ingredients=" + Arrays.deepToString(ingredients) +
+                ", minIngredientsPerSlice=" + minIngredientsPerSlice +
+                ", maxCellsPerSlice=" + maxCellsPerSlice +
+                '}';
     }
 }
