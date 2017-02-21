@@ -34,8 +34,7 @@ public class PizzaSlicer {
     private static Pizza readFileToPizza(File file) throws Exception {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
-            String s1 = br.readLine();
-            String[] s = s1.split("\\s+");
+            String[] s = br.readLine().split("\\s+");
             Pizza pizza = new Pizza(Integer.parseInt(s[0]), Integer.parseInt(s[1]), Integer.parseInt(s[2]), Integer.parseInt(s[3]));
 
             int i = 0;
