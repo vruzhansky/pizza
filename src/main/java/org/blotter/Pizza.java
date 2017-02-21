@@ -1,7 +1,9 @@
 package org.blotter;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
@@ -26,13 +28,12 @@ public class Pizza {
     }
 
     private static void readFileByLine(File file) {
-        try {
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNext()) {
-                System.out.println(scanner.next());
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
             }
-            scanner.close();
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
